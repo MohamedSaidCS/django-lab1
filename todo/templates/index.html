@@ -1,0 +1,34 @@
+{% extends "base.html"%}
+
+{% block title %}
+    Todos - Home
+{% endblock %}
+{% block content %}
+    <h1 class="text-center">Todos</h1>
+    <a href="{% url 'todo:create' %}" class="btn btn-primary">Create</a>
+    <table class="table text-center">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Done</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+          {% for todo in todos %}
+              <tr>
+              <th scope="row">{{ todo.id }}</th>
+              <td>{{ todo.name }}</td>
+              <td>{{ todo.done }}</td>
+              <td>
+                  <a href="{% url 'todo:done' todo.id %}" class="btn btn-success">Mark Done</a>
+                  <a href="{% url 'todo:show' todo.id %}" class="btn btn-primary">Details</a>
+                  <a href="{% url 'todo:edit' todo.id %}" class="btn btn-dark">Edit</a>
+                  <a href="{% url 'todo:delete' todo.id %}" class="btn btn-danger">Delete</a>
+              </td>
+            </tr>
+          {% endfor %}
+      </tbody>
+    </table>
+{% endblock %}
